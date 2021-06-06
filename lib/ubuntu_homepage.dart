@@ -1,8 +1,9 @@
 import 'dart:async';
-
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:intl/intl.dart';
+
+import 'constants/global.dart';
 
 class MyHomePage extends StatefulWidget {
   const MyHomePage({Key key}) : super(key: key);
@@ -13,6 +14,7 @@ class MyHomePage extends StatefulWidget {
 
 class _MyHomePageState extends State<MyHomePage> {
   String _timeString = '';
+  String src = 'https://devtris.codechefvit.com';
   @override
   void initState() {
     super.initState();
@@ -43,8 +45,52 @@ class _MyHomePageState extends State<MyHomePage> {
         ),
         SideTaskbar(size: size),
         Header(size: size, timeString: _timeString),
+        ApplicationWindow(
+          size: size,
+          show: showDartpadWindow,
+          viewType: 'dart-pad',
+        ),
+        ApplicationWindow(
+          size: size,
+          show: showVsCodeWindow,
+          viewType: 'vscode-github',
+        ),
+        ApplicationWindow(
+          size: size,
+          show: showDevtetrisWindow,
+          viewType: 'dev-tetris',
+        ),
       ],
     ));
+  }
+}
+
+class ApplicationWindow extends StatelessWidget {
+  final bool show;
+  final String viewType;
+  const ApplicationWindow({
+    Key key,
+    @required this.size,
+    this.show,
+    this.viewType,
+  }) : super(key: key);
+
+  final Size size;
+
+  @override
+  Widget build(BuildContext context) {
+    return Visibility(
+      visible: show,
+      child: Positioned(
+        bottom: 0,
+        right: 0,
+        child: Container(
+          height: size.height - 30,
+          width: size.width - 50,
+          child: HtmlElementView(viewType: viewType),
+        ),
+      ),
+    );
   }
 }
 
@@ -149,7 +195,7 @@ class HeaderIcons extends StatelessWidget {
   }
 }
 
-class SideTaskbar extends StatelessWidget {
+class SideTaskbar extends StatefulWidget {
   const SideTaskbar({
     Key key,
     @required this.size,
@@ -158,26 +204,31 @@ class SideTaskbar extends StatelessWidget {
   final Size size;
 
   @override
+  _SideTaskbarState createState() => _SideTaskbarState();
+}
+
+class _SideTaskbarState extends State<SideTaskbar> {
+  @override
   Widget build(BuildContext context) {
     return Positioned(
       left: 0,
       child: Container(
-        height: size.height,
+        height: widget.size.height,
         width: 50,
         color: Colors.black.withOpacity(.5),
         child: Column(
           children: [
             SizedBox(
-              height: size.height * .01,
+              height: widget.size.height * .02,
             ),
             Container(
-              height: size.height * .7,
+              height: widget.size.height * .7,
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: [
                   TaskBarIcon(
-                    path: "assets/images/chrome.png",
-                    label: 'Chrome',
+                    path: "assets/images/dart_logo.png",
+                    label: 'DartPad',
                   ),
                   TaskBarIcon(
                     path: "assets/images/user-home.png",
@@ -190,6 +241,10 @@ class SideTaskbar extends StatelessWidget {
                   TaskBarIcon(
                     path: "assets/images/bash.png",
                     label: 'Terminal',
+                  ),
+                  TaskBarIcon(
+                    path: "assets/images/hextris.png",
+                    label: 'Play Hextris',
                   ),
                   TaskBarIcon(
                     path: "assets/images/gnome-control-center.png",
@@ -232,12 +287,28 @@ class _TaskBarIconState extends State<TaskBarIcon> {
   @override
   Widget build(BuildContext context) {
     return InkWell(
+      onTap: () {
+        setState(() {
+          if (widget.label == 'DartPad') {
+            showDevtetrisWindow = false;
+            showVsCodeWindow = false;
+            showDartpadWindow = true;
+          } else if (widget.label == 'Visual Studio Code') {
+            showDartpadWindow = false;
+            showDevtetrisWindow = false;
+            showVsCodeWindow = true;
+          } else if (widget.label == 'Play Hextris') {
+            showDartpadWindow = false;
+            showDevtetrisWindow = true;
+            showVsCodeWindow = false;
+          }
+        });
+      },
       onHover: (b) {
         setState(() {
           hover = b;
         });
       },
-      onTap: () {},
       child: Tooltip(
         message: widget.label,
         child: Container(
