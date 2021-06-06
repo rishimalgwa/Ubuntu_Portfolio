@@ -1,6 +1,6 @@
-# ubuntu_portfolio
-
-A new Flutter project.
+# Ubuntu Portfolio
+Ubuntu 20.04 themed personal portfolio inspried from https://github.com/vivek9patel/vivek9patel.github.io .
+- Flutter is used for forntend.
 
 ## Getting Started
 
