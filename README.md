@@ -1,7 +1,6 @@
 # Ubuntu Portfolio
-
-A Ubuntu 20.04 themed personal portfolio inspried from https://github.com/vivek9patel/vivek9patel.github.io
-Flutter is used form forntend.
+Ubuntu 20.04 themed personal portfolio inspried from https://github.com/vivek9patel/vivek9patel.github.io .
+- Flutter is used for forntend.
 
 ## Getting Started
 
