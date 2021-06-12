@@ -5,26 +5,24 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:ubuntu_portfolio/ubuntu_homepage.dart';
 import 'dart:ui' as ui;
 
+import 'constants/constants.dart';
+
 void main() {
   // ignore: undefined_prefixed_name
   ui.platformViewRegistry.registerViewFactory(
-      'dev-tetris',
+      Constants.playHexties,
       (int viewId) => IFrameElement()
-        ..width = '640'
-        ..height = '360'
         ..src = 'https://devtris.codechefvit.com'
         ..style.border = 'none');
   // ignore: undefined_prefixed_name
   ui.platformViewRegistry.registerViewFactory(
-      'vscode-github',
+      Constants.vsCodeGithub,
       (int viewId) => IFrameElement()
-        ..width = '640'
-        ..height = '360'
         ..src = 'https://github1s.com/rishimalgwa/Ubuntu_Portfolio'
         ..style.border = 'none');
   // ignore: undefined_prefixed_name
   ui.platformViewRegistry.registerViewFactory(
-      'dart-pad',
+      Constants.dartpad,
       (int viewId) =>
           IFrameElement()..src = 'https://www.dartpad.dev/?null_safety=true');
 
@@ -40,9 +38,12 @@ class MyApp extends StatelessWidget {
       title: 'Rishi\'s Portfolio',
       theme: ThemeData(
           // primarySwatch: Colors.blue,
+          scrollbarTheme: ScrollbarThemeData().copyWith(
+            thumbColor: MaterialStateProperty.all(Colors.white60),
+          ),
           textTheme: GoogleFonts.ubuntuTextTheme(
-        Theme.of(context).textTheme,
-      )),
+            Theme.of(context).textTheme,
+          )),
       home: MyHomePage(),
     );
   }

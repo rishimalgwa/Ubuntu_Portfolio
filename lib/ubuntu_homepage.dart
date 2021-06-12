@@ -1,9 +1,15 @@
 import 'dart:async';
+// ignore: unused_import
+import 'package:battery/battery.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/svg.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 import 'package:intl/intl.dart';
+import 'package:ubuntu_portfolio/widgets/header.dart';
+import 'package:ubuntu_portfolio/widgets/side_taskbar.dart';
+import 'package:ubuntu_portfolio/windows/applications_window.dart';
 
 import 'constants/global.dart';
+import 'constants/constants.dart';
 
 class MyHomePage extends StatefulWidget {
   const MyHomePage({Key key}) : super(key: key);
@@ -18,10 +24,15 @@ class _MyHomePageState extends State<MyHomePage> {
   @override
   void initState() {
     super.initState();
+    setState(() {
+      showAboutWindow = true;
+    });
     Timer.periodic(Duration(seconds: 1), (Timer t) => _getTime());
   }
 
-  void _getTime() {
+  void _getTime() async {
+    // var _battery = Battery();
+    // print(await _battery.batteryLevel);
     final String formattedDateTime =
         DateFormat('EEE MMM d h:mm a').format(DateTime.now()).toString();
     setState(() {
@@ -45,259 +56,96 @@ class _MyHomePageState extends State<MyHomePage> {
         ),
         SideTaskbar(size: size),
         Header(size: size, timeString: _timeString),
+        Visibility(
+          visible:
+              !showDartpadWindow && !showDevtetrisWindow && !showVsCodeWindow,
+          child: Positioned(
+            left: 51,
+            bottom: 0,
+            child: Container(
+              height: size.height - 30,
+              width: 80,
+              child: Column(
+                children: [
+                  SizedBox(
+                    height: size.height * .02,
+                  ),
+                  OnScreenIcons(
+                    path: "assets/images/user-home.png",
+                    label: Constants.aboutRishi,
+                  ),
+                  SizedBox(
+                    height: 8,
+                  ),
+                  OnScreenIcons(
+                    path: "assets/images/user-trash-full.png",
+                    label: Constants.trash,
+                  ),
+                  SizedBox(
+                    height: 8,
+                  ),
+                  OnScreenIcons(
+                    path: "assets/images/thunderbird-email.png",
+                    label: Constants.sendEmail,
+                  ),
+                ],
+              ),
+            ),
+          ),
+        ),
         ApplicationWindow(
           size: size,
           show: showDartpadWindow,
-          viewType: 'dart-pad',
+          viewType: Constants.dartpad,
         ),
         ApplicationWindow(
           size: size,
           show: showVsCodeWindow,
-          viewType: 'vscode-github',
+          viewType: Constants.vsCodeGithub,
         ),
         ApplicationWindow(
           size: size,
           show: showDevtetrisWindow,
-          viewType: 'dev-tetris',
+          viewType: Constants.playHexties,
         ),
+        ApplicationWindow(
+          size: size,
+          show: showAboutWindow,
+          viewType: Constants.aboutRishi,
+          isWebApp: false,
+        )
       ],
     ));
   }
 }
 
-class ApplicationWindow extends StatelessWidget {
-  final bool show;
-  final String viewType;
-  const ApplicationWindow({
-    Key key,
-    @required this.size,
-    this.show,
-    this.viewType,
-  }) : super(key: key);
-
-  final Size size;
-
-  @override
-  Widget build(BuildContext context) {
-    return Visibility(
-      visible: show,
-      child: Positioned(
-        bottom: 0,
-        right: 0,
-        child: Container(
-          height: size.height - 30,
-          width: size.width - 50,
-          child: HtmlElementView(viewType: viewType),
-        ),
-      ),
-    );
-  }
-}
-
-class Header extends StatefulWidget {
-  const Header({
-    Key key,
-    @required this.size,
-    @required String timeString,
-  })  : _timeString = timeString,
-        super(key: key);
-
-  final Size size;
-  final String _timeString;
-
-  @override
-  _HeaderState createState() => _HeaderState();
-}
-
-class _HeaderState extends State<Header> {
-  bool hover = false;
-  @override
-  Widget build(BuildContext context) {
-    return Positioned(
-      child: Container(
-        width: widget.size.width,
-        height: 30,
-        color: Colors.black,
-        child: Row(
-          children: [
-            SizedBox(
-              width: 8,
-            ),
-            Text(
-              'Activities',
-              style: TextStyle(color: Colors.white, fontSize: 13),
-            ),
-            Spacer(),
-            Text(
-              widget._timeString,
-              style: TextStyle(color: Colors.white, fontSize: 14),
-            ),
-            Spacer(),
-            Container(
-              width: 75,
-              child: Column(
-                children: [
-                  SizedBox(
-                    height: 2,
-                  ),
-                  InkWell(
-                      onTap: () {
-                        setState(() {
-                          hover = true;
-                        });
-                      },
-                      child: HeaderIcons()),
-                  Spacer(),
-                  Container(
-                    height: 2,
-                    color: hover ? Colors.orange.shade900 : Colors.transparent,
-                  )
-                ],
-              ),
-            )
-          ],
-        ),
-      ),
-    );
-  }
-}
-
-class HeaderIcons extends StatelessWidget {
-  const HeaderIcons({
-    Key key,
-  }) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return Row(
-      children: [
-        Icon(
-          Icons.signal_wifi_4_bar,
-          color: Colors.white,
-          size: 15,
-        ),
-        Icon(
-          Icons.volume_down,
-          color: Colors.white,
-          size: 20,
-        ),
-        Icon(
-          Icons.battery_full,
-          color: Colors.white,
-          size: 15,
-        ),
-        Icon(
-          Icons.arrow_drop_down,
-          color: Colors.white,
-        ),
-      ],
-    );
-  }
-}
-
-class SideTaskbar extends StatefulWidget {
-  const SideTaskbar({
-    Key key,
-    @required this.size,
-  }) : super(key: key);
-
-  final Size size;
-
-  @override
-  _SideTaskbarState createState() => _SideTaskbarState();
-}
-
-class _SideTaskbarState extends State<SideTaskbar> {
-  @override
-  Widget build(BuildContext context) {
-    return Positioned(
-      left: 0,
-      child: Container(
-        height: widget.size.height,
-        width: 50,
-        color: Colors.black.withOpacity(.5),
-        child: Column(
-          children: [
-            SizedBox(
-              height: widget.size.height * .02,
-            ),
-            Container(
-              height: widget.size.height * .7,
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                children: [
-                  TaskBarIcon(
-                    path: "assets/images/dart_logo.png",
-                    label: 'DartPad',
-                  ),
-                  TaskBarIcon(
-                    path: "assets/images/user-home.png",
-                    label: 'About Rishi',
-                  ),
-                  TaskBarIcon(
-                    path: "assets/images/vscode.png",
-                    label: 'Visual Studio Code',
-                  ),
-                  TaskBarIcon(
-                    path: "assets/images/bash.png",
-                    label: 'Terminal',
-                  ),
-                  TaskBarIcon(
-                    path: "assets/images/hextris.png",
-                    label: 'Play Hextris',
-                  ),
-                  TaskBarIcon(
-                    path: "assets/images/gnome-control-center.png",
-                    label: 'Settings',
-                  ),
-                ],
-              ),
-            ),
-            Spacer(),
-            TaskBarIcon(
-                path: 'assets/svgs/view-app-grid-symbolic.svg',
-                label: 'Show Applications',
-                isSvg: true),
-            SizedBox(
-              height: 15,
-            )
-          ],
-        ),
-      ),
-    );
-  }
-}
-
-class TaskBarIcon extends StatefulWidget {
+class OnScreenIcons extends StatefulWidget {
   final String path, label;
   final bool isSvg;
-  const TaskBarIcon({
-    Key key,
-    @required this.path,
-    @required this.label,
-    this.isSvg = false,
-  }) : super(key: key);
+  const OnScreenIcons({Key key, this.path, this.label, this.isSvg = false})
+      : super(key: key);
 
   @override
-  _TaskBarIconState createState() => _TaskBarIconState();
+  _OnScreenIconsState createState() => _OnScreenIconsState();
 }
 
-class _TaskBarIconState extends State<TaskBarIcon> {
+class _OnScreenIconsState extends State<OnScreenIcons> {
   bool hover = false;
   @override
   Widget build(BuildContext context) {
     return InkWell(
       onTap: () {
         setState(() {
-          if (widget.label == 'DartPad') {
+          if (widget.label == Constants.aboutRishi) {
             showDevtetrisWindow = false;
             showVsCodeWindow = false;
-            showDartpadWindow = true;
-          } else if (widget.label == 'Visual Studio Code') {
+            showDartpadWindow = false;
+            showAboutWindow = true;
+          } else if (widget.label == Constants.vsCodeGithub) {
             showDartpadWindow = false;
             showDevtetrisWindow = false;
             showVsCodeWindow = true;
-          } else if (widget.label == 'Play Hextris') {
+          } else if (widget.label == Constants.playHexties) {
             showDartpadWindow = false;
             showDevtetrisWindow = true;
             showVsCodeWindow = false;
@@ -309,28 +157,136 @@ class _TaskBarIconState extends State<TaskBarIcon> {
           hover = b;
         });
       },
-      child: Tooltip(
-        message: widget.label,
-        child: Container(
-          height: 38,
-          width: 38,
-          padding: const EdgeInsets.all(4),
-          decoration: BoxDecoration(
-            color: hover ? Colors.white.withOpacity(.15) : Colors.transparent,
-            borderRadius: BorderRadius.all(Radius.circular(5)),
-            // image: DecorationImage(
-            //   image: AssetImage(widget.path),
-            //   fit: BoxFit.fill,
-            // ),
-          ),
-          child: widget.isSvg
-              ? SvgPicture.asset(widget.path)
-              : Image(
-                  image: AssetImage(widget.path),
-                  fit: BoxFit.fill,
-                ),
+      child: Container(
+        height: 70,
+        width: 70,
+        padding: const EdgeInsets.all(4),
+        decoration: BoxDecoration(
+          color: hover ? MyColors.hoverBGColor : Colors.transparent,
+          borderRadius: BorderRadius.all(Radius.circular(5)),
+        ),
+        child: Column(
+          children: [
+            widget.isSvg
+                ? SvgPicture.asset(widget.path)
+                : Image(
+                    image: AssetImage(widget.path),
+                    fit: BoxFit.fill,
+                    height: 40,
+                  ),
+            SizedBox(
+              height: 8,
+            ),
+            Text(
+              widget.label,
+              style: TextStyle(fontSize: 10, color: Colors.white),
+            )
+          ],
         ),
       ),
+    );
+  }
+}
+
+class AboutPage extends StatefulWidget {
+  const AboutPage({Key key}) : super(key: key);
+
+  @override
+  _AboutPageState createState() => _AboutPageState();
+}
+
+ScrollController scrollController;
+
+class _AboutPageState extends State<AboutPage> {
+  @override
+  void initState() {
+    super.initState();
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    final size = MediaQuery.of(context).size;
+    return Row(
+      children: [
+        Container(
+          width: size.width * .2,
+          height: size.height,
+          color: MyColors.darkGreyS2,
+        ),
+        Container(
+          width: isMaximize ? size.width * .8 - 50 : size.width * .648,
+          height: size.height,
+          color: MyColors.matBlack,
+          child: SingleChildScrollView(
+            controller: scrollController,
+            child: Column(
+              children: [
+                SizedBox(
+                  height: 50,
+                ),
+                CircleAvatar(
+                  radius: isMaximize ? 57 : 50,
+                  backgroundImage: NetworkImage(
+                      'https://avatars.githubusercontent.com/u/38785008?v=4'),
+                ),
+                SizedBox(
+                  height: 20,
+                ),
+                Text(
+                  'Hey, Nice to meet you\nI am Rishi Malgwa',
+                  textAlign: TextAlign.center,
+                  style: TextStyle(
+                      fontSize: isMaximize ? 23 : 19,
+                      fontWeight: FontWeight.w600,
+                      color: Colors.white),
+                ),
+                SizedBox(
+                  height: 20,
+                ),
+                Text(
+                  'I’m an Android & Flutter app Developer, passionate about building great apps.',
+                  style: TextStyle(
+                      fontSize: isMaximize ? 19 : 15,
+                      fontWeight: FontWeight.w400,
+                      color: MyColors.orangeS9),
+                ),
+                SizedBox(
+                  height: 50,
+                ),
+                Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(
+                      '- I’m form most cleanest city of India that is Indore.',
+                      style: TextStyle(
+                          fontSize: isMaximize ? 19 : 15,
+                          fontWeight: FontWeight.w400,
+                          color: Colors.white),
+                    ),
+                    SizedBox(height: 10),
+                    Text(
+                      '- I’m currently pursuing my Bachelors in Information and Technology form VIT, Vellore.',
+                      style: TextStyle(
+                          fontSize: isMaximize ? 19 : 15,
+                          fontWeight: FontWeight.w400,
+                          color: Colors.white),
+                    ),
+                    SizedBox(height: 10),
+                    Text(
+                      '- I love turning ideas into reality.',
+                      style: TextStyle(
+                          fontSize: isMaximize ? 19 : 15,
+                          fontWeight: FontWeight.w400,
+                          color: Colors.white),
+                    ),
+                    SizedBox(height: 10),
+                  ],
+                )
+              ],
+            ),
+          ),
+        ),
+      ],
     );
   }
 }
