@@ -1,8 +1,9 @@
+// ignore: avoid_web_libraries_in_flutter
 import 'dart:html';
 
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:ubuntu_portfolio/ubuntu_homepage.dart';
+import 'package:ubuntu_portfolio/pages/ubuntu_homepage.dart';
 import 'dart:ui' as ui;
 
 import 'constants/constants.dart';

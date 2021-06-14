@@ -2,8 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:ubuntu_portfolio/constants/constants.dart';
 import 'package:ubuntu_portfolio/constants/global.dart';
-
-import '../ubuntu_homepage.dart';
+import 'package:ubuntu_portfolio/pages/about_page.dart';
 
 class ApplicationWindow extends StatefulWidget {
   final bool show;
