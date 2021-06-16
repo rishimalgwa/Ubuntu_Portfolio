@@ -62,7 +62,7 @@ class AboutMe extends StatelessWidget {
           child: Container(
             padding: const EdgeInsets.all(8),
             width: size.width * .7,
-            height: isMobileView ? size.height * .4 : size.height * .23,
+            height: isMobileView ? size.height * .4 : size.height * .3,
             color: MyColors.matBlack,
             child: Align(
               alignment: Alignment.centerLeft,

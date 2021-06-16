@@ -11,6 +11,10 @@ class Constants {
   static final String settings = 'Settings';
   static final String trash = 'Trash';
   static final String sendEmail = 'Send Email';
+  static final String aboutMe = 'About Me';
+  static final String skills = 'Skills';
+  static final String projects = 'Projects';
+  static final String resume = 'Resume';
 }
 
 class MyColors {
