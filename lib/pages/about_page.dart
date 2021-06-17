@@ -3,6 +3,9 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:ubuntu_portfolio/constants/constants.dart';
 import 'package:ubuntu_portfolio/constants/global.dart';
 import 'package:ubuntu_portfolio/windows/about_me.dart';
+import 'package:ubuntu_portfolio/windows/projects.dart';
+import 'package:ubuntu_portfolio/windows/resume.dart';
+import 'package:ubuntu_portfolio/windows/skills.dart';
 
 class AboutPage extends StatefulWidget {
   const AboutPage({Key key}) : super(key: key);
@@ -61,11 +64,25 @@ class _AboutPageState extends State<AboutPage> {
           color: MyColors.darkGrey,
           child: SingleChildScrollView(
             controller: scrollController,
-            child: AboutMe(),
+            child: selectWindow(),
           ),
         ),
       ],
     );
+  }
+
+  Widget selectWindow() {
+    if (showAboutMe) {
+      return Skills();
+    } else if (showSkills) {
+      return Skills();
+    } else if (showResume) {
+      return Resume();
+    } else if (showProjects) {
+      return Projects();
+    } else {
+      return Container();
+    }
   }
 }
 

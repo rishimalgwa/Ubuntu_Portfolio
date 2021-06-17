@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:ubuntu_portfolio/constants/constants.dart';
 import 'package:ubuntu_portfolio/constants/global.dart';
+import 'package:ubuntu_portfolio/widgets/cards.dart';
 import 'package:ubuntu_portfolio/widgets/text_widgets.dart';
 
 class AboutMe extends StatelessWidget {
@@ -55,43 +56,35 @@ class AboutMe extends StatelessWidget {
         SizedBox(
           height: 40,
         ),
-        Card(
-          shadowColor: Colors.black,
-          color: Colors.black,
-          elevation: 10,
-          child: Container(
-            padding: const EdgeInsets.all(8),
-            width: size.width * .7,
-            height: isMobileView ? size.height * .4 : size.height * .3,
-            color: MyColors.matBlack,
-            child: Align(
-              alignment: Alignment.centerLeft,
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                children: [
-                  AboutBoxText(
-                    isMobileView: isMobileView,
-                    text:
-                        'I’m form most cleanest city of India that is Indore.',
-                  ),
-                  Divider(
-                    color: MyColors.darkGrey,
-                  ),
-                  AboutBoxText(
-                    isMobileView: isMobileView,
-                    text:
-                        'I’m currently pursuing my Bachelors in Information and Technology form VIT, Vellore.',
-                  ),
-                  Divider(
-                    color: MyColors.darkGrey,
-                  ),
-                  AboutBoxText(
-                    isMobileView: isMobileView,
-                    text: 'I love turning ideas into reality.',
-                  ),
-                ],
-              ),
+        AboutGreyCard(
+          size: size,
+          isMobileView: isMobileView,
+          child: Align(
+            alignment: Alignment.centerLeft,
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              children: [
+                AboutBoxText(
+                  isMobileView: isMobileView,
+                  text: 'I’m form most cleanest city of India that is Indore.',
+                ),
+                Divider(
+                  color: MyColors.darkGrey,
+                ),
+                AboutBoxText(
+                  isMobileView: isMobileView,
+                  text:
+                      'I’m currently pursuing my Bachelors in Information and Technology form VIT, Vellore.',
+                ),
+                Divider(
+                  color: MyColors.darkGrey,
+                ),
+                AboutBoxText(
+                  isMobileView: isMobileView,
+                  text: 'I love turning ideas into reality.',
+                ),
+              ],
             ),
           ),
         )
