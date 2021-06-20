@@ -2,9 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:ubuntu_portfolio/constants/constants.dart';
 import 'package:ubuntu_portfolio/constants/global.dart';
+import 'package:ubuntu_portfolio/constants/mycolors.dart';
+import 'package:ubuntu_portfolio/utils/url_launcher.dart';
 import 'package:ubuntu_portfolio/windows/about_me.dart';
 import 'package:ubuntu_portfolio/windows/projects.dart';
-import 'package:ubuntu_portfolio/windows/resume.dart';
 import 'package:ubuntu_portfolio/windows/skills.dart';
 
 class AboutPage extends StatefulWidget {
@@ -73,11 +74,16 @@ class _AboutPageState extends State<AboutPage> {
 
   Widget selectWindow() {
     if (showAboutMe) {
-      return Skills();
+      return AboutMe();
     } else if (showSkills) {
       return Skills();
     } else if (showResume) {
-      return Resume();
+      Utils.launchURL(Constants.resumeUrl);
+      setState(() {
+        showResume = false;
+        showAboutMe = true;
+      });
+      return Container();
     } else if (showProjects) {
       return Projects();
     } else {

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:ubuntu_portfolio/constants/constants.dart';
 import 'package:ubuntu_portfolio/constants/global.dart';
+import 'package:ubuntu_portfolio/constants/mycolors.dart';
 import 'package:ubuntu_portfolio/widgets/cards.dart';
 import 'package:ubuntu_portfolio/widgets/text_widgets.dart';
 

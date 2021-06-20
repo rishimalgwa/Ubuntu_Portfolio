@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:ubuntu_portfolio/constants/lists.dart';
 import 'package:ubuntu_portfolio/widgets/cards.dart';
 import 'package:flutter_tags/flutter_tags.dart';
 
@@ -10,9 +10,6 @@ class Skills extends StatefulWidget {
   @override
   _SkillsState createState() => _SkillsState();
 }
-
-List sportList = ['Dart', 'Java', 'C++', 'C', 'Javascript', 'Python', 'Kotlin'];
-//List langIconList = [Icons.dart,FontAwesomeIcons.python,Icons.flutter_dash];
 
 class _SkillsState extends State<Skills> {
   @override
@@ -34,8 +31,9 @@ class _SkillsState extends State<Skills> {
         SkillsLabelCard(
           label: 'Languages',
           child: SkillTags(
-            itemList: sportList,
-            iconList: [],
+            itemList: kLists.langList,
+            iconList: kLists.langIconList,
+            iconColorList: kLists.langLogoColors,
           ),
         ),
         SizedBox(
@@ -43,7 +41,11 @@ class _SkillsState extends State<Skills> {
         ),
         SkillsLabelCard(
           label: 'Frameworks and Tools',
-          child: null,
+          child: SkillTags(
+            iconColorList: kLists.toolsLogoColors,
+            iconList: kLists.frameToolsLogo,
+            itemList: kLists.frameTools,
+          ),
         ),
       ],
     );
@@ -55,43 +57,39 @@ class SkillTags extends StatelessWidget {
     Key key,
     @required this.itemList,
     @required this.iconList,
+    @required this.iconColorList,
   }) : super(key: key);
 
   final List itemList;
   final List iconList;
+  final List iconColorList;
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      padding: const EdgeInsets.all(8),
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.start,
-        children: [
-          Padding(
-            padding: const EdgeInsets.all(8.0),
-            child: Tags(
-              itemCount: itemList.length,
-              itemBuilder: (index) {
-                return ItemTags(
-                  alignment: MainAxisAlignment.start,
-                  combine: ItemTagsCombine.withTextAfter,
-                  textActiveColor: Colors.black,
-                  image: ItemTagsImage(
-                      child: SvgPicture.asset(
-                    'assets/svgs/window-minimize-symbolic.svg',
-                    color: Colors.pink,
-                  )),
-                  activeColor: Colors.white,
-                  //icon: ItemTagsIcon(icon: iconList[index]),
-                  border: Border.all(width: 2, color: Colors.black),
-                  index: index,
-                  title: itemList[index],
-                  textStyle: TextStyle(fontSize: 15, color: Colors.black),
-                );
-              },
-            ),
-          )
-        ],
+    final size = MediaQuery.of(context).size;
+    bool isMobileView = 510 >= size.width;
+    return Padding(
+      padding: const EdgeInsets.all(8.0),
+      child: Tags(
+        itemCount: itemList.length,
+        itemBuilder: (index) {
+          return ItemTags(
+            alignment: MainAxisAlignment.spaceAround,
+            combine: ItemTagsCombine.withTextAfter,
+            textActiveColor: Colors.black,
+            image: ItemTagsImage(
+                child: SvgPicture.string(
+              iconList[index],
+              color: iconColorList[index],
+              height: isMobileView ? 18 : 23,
+            )),
+            activeColor: Colors.white,
+            index: index,
+            title: itemList[index],
+            textStyle: TextStyle(
+                fontSize: isMobileView ? 11 : 15, color: Colors.black),
+          );
+        },
       ),
     );
   }

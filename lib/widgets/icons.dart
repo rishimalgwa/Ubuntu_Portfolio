@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:ubuntu_portfolio/constants/constants.dart';
 import 'package:ubuntu_portfolio/constants/global.dart';
+import 'package:ubuntu_portfolio/constants/mycolors.dart';
 
 class OnScreenIcons extends StatefulWidget {
   final String path, label;
