@@ -56,4 +56,20 @@ class kLists {
     SvgString.gitLogo,
     SvgString.githubLogo
   ];
+
+  static final List flutterFirebaseTech = [
+    'Flutter',
+    'Dart',
+    'Firebase',
+  ];
+  static final List flutterFirebaseTechLogo = [
+    SvgString.flutterLogo,
+    SvgString.dartLogo,
+    SvgString.firebaseLogo,
+  ];
+  static final List flutterFirebaseTechLogoColors = [
+    Color(0XFF02569B), // flutter
+    Color(0XFF0175C2), // dart
+    Color(0XFFFFCA28), // firebase
+  ];
 }

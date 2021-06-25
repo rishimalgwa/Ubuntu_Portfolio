@@ -1,8 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/flutter_svg.dart';
 import 'package:ubuntu_portfolio/constants/lists.dart';
 import 'package:ubuntu_portfolio/widgets/cards.dart';
-import 'package:flutter_tags/flutter_tags.dart';
+import 'package:ubuntu_portfolio/widgets/tags.dart';
 
 class Skills extends StatefulWidget {
   const Skills({Key key}) : super(key: key);
@@ -48,49 +47,6 @@ class _SkillsState extends State<Skills> {
           ),
         ),
       ],
-    );
-  }
-}
-
-class SkillTags extends StatelessWidget {
-  const SkillTags({
-    Key key,
-    @required this.itemList,
-    @required this.iconList,
-    @required this.iconColorList,
-  }) : super(key: key);
-
-  final List itemList;
-  final List iconList;
-  final List iconColorList;
-
-  @override
-  Widget build(BuildContext context) {
-    final size = MediaQuery.of(context).size;
-    bool isMobileView = 510 >= size.width;
-    return Padding(
-      padding: const EdgeInsets.all(8.0),
-      child: Tags(
-        itemCount: itemList.length,
-        itemBuilder: (index) {
-          return ItemTags(
-            alignment: MainAxisAlignment.spaceAround,
-            combine: ItemTagsCombine.withTextAfter,
-            textActiveColor: Colors.black,
-            image: ItemTagsImage(
-                child: SvgPicture.string(
-              iconList[index],
-              color: iconColorList[index],
-              height: isMobileView ? 18 : 23,
-            )),
-            activeColor: Colors.white,
-            index: index,
-            title: itemList[index],
-            textStyle: TextStyle(
-                fontSize: isMobileView ? 11 : 15, color: Colors.black),
-          );
-        },
-      ),
     );
   }
 }

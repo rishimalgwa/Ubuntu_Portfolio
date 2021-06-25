@@ -3,7 +3,7 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:ubuntu_portfolio/constants/constants.dart';
 import 'package:ubuntu_portfolio/constants/global.dart';
 import 'package:ubuntu_portfolio/constants/mycolors.dart';
-import 'package:ubuntu_portfolio/utils/url_launcher.dart';
+import 'package:ubuntu_portfolio/utils/utils.dart';
 import 'package:ubuntu_portfolio/windows/about_me.dart';
 import 'package:ubuntu_portfolio/windows/projects.dart';
 import 'package:ubuntu_portfolio/windows/skills.dart';
@@ -74,7 +74,7 @@ class _AboutPageState extends State<AboutPage> {
 
   Widget selectWindow() {
     if (showAboutMe) {
-      return AboutMe();
+      return Projects();
     } else if (showSkills) {
       return Skills();
     } else if (showResume) {
