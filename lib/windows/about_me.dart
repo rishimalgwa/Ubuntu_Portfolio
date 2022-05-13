@@ -6,7 +6,7 @@ import 'package:ubuntu_portfolio/widgets/text_widgets.dart';
 
 class AboutMe extends StatelessWidget {
   const AboutMe({
-    Key key,
+    Key? key,
   }) : super(key: key);
 
   @override

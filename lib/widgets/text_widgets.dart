@@ -3,9 +3,9 @@ import 'package:ubuntu_portfolio/constants/global.dart';
 
 class AboutBoxText extends StatelessWidget {
   const AboutBoxText({
-    Key key,
-    @required this.isMobileView,
-    @required this.text,
+    Key? key,
+    required this.isMobileView,
+    required this.text,
   }) : super(key: key);
 
   final bool isMobileView;

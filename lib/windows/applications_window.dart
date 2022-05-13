@@ -6,13 +6,13 @@ import 'package:ubuntu_portfolio/constants/mycolors.dart';
 import 'package:ubuntu_portfolio/pages/about_page.dart';
 
 class ApplicationWindow extends StatefulWidget {
-  final bool show;
-  final String viewType;
+  final bool? show;
+  final String? viewType;
   final Size size;
   final bool isWebApp;
   const ApplicationWindow({
-    Key key,
-    @required this.size,
+    Key? key,
+    required this.size,
     this.show,
     this.viewType,
     this.isWebApp = true,
@@ -29,7 +29,7 @@ class _ApplicationWindowState extends State<ApplicationWindow> {
   @override
   Widget build(BuildContext context) {
     return Visibility(
-      visible: widget.show,
+      visible: widget.show!,
       child: Positioned(
         bottom: isMaximize ? 0 : 100,
         right: isMaximize ? 0 : 90,
@@ -54,7 +54,7 @@ class _ApplicationWindowState extends State<ApplicationWindow> {
                       width: 30,
                     ),
                     Text(
-                      widget.viewType,
+                      widget.viewType!,
                       style: TextStyle(
                           fontWeight: FontWeight.bold,
                           fontSize: 14,
@@ -159,10 +159,10 @@ class _ApplicationWindowState extends State<ApplicationWindow> {
               Expanded(
                 flex: 1,
                 child: widget.isWebApp
-                    ? HtmlElementView(viewType: widget.viewType)
+                    ? HtmlElementView(viewType: widget.viewType!)
                     : widget.viewType == 'About Rishi'
                         ? AboutPage()
-                        : null,
+                        : SizedBox(),
               ),
             ],
           ),

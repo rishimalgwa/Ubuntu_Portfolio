@@ -6,8 +6,8 @@ import 'package:ubuntu_portfolio/constants/mycolors.dart';
 
 class SideTaskbar extends StatefulWidget {
   const SideTaskbar({
-    Key key,
-    @required this.size,
+    Key? key,
+    required this.size,
   }) : super(key: key);
 
   final Size size;
@@ -77,9 +77,9 @@ class TaskBarIcon extends StatefulWidget {
   final String path, label;
   final bool isSvg;
   const TaskBarIcon({
-    Key key,
-    @required this.path,
-    @required this.label,
+    Key? key,
+    required this.path,
+    required this.label,
     this.isSvg = false,
   }) : super(key: key);
 

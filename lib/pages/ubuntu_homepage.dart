@@ -1,4 +1,5 @@
 import 'dart:async';
+
 // ignore: unused_import
 import 'package:battery/battery.dart';
 import 'package:flutter/material.dart';
@@ -8,11 +9,11 @@ import 'package:ubuntu_portfolio/widgets/icons.dart';
 import 'package:ubuntu_portfolio/widgets/side_taskbar.dart';
 import 'package:ubuntu_portfolio/windows/applications_window.dart';
 
-import '../constants/global.dart';
 import '../constants/constants.dart';
+import '../constants/global.dart';
 
 class MyHomePage extends StatefulWidget {
-  const MyHomePage({Key key}) : super(key: key);
+  const MyHomePage({Key? key}) : super(key: key);
 
   @override
   _MyHomePageState createState() => _MyHomePageState();
@@ -24,9 +25,9 @@ class _MyHomePageState extends State<MyHomePage> {
   @override
   void initState() {
     super.initState();
-    setState(() {
-      showAboutWindow = true;
-    });
+    // setState(() {
+    //   showAboutWindow = true;
+    // });
     Timer.periodic(Duration(seconds: 1), (Timer t) => _getTime());
   }
 

@@ -5,10 +5,10 @@ import 'package:ubuntu_portfolio/widgets/tags.dart';
 
 class AboutGreyCard extends StatelessWidget {
   const AboutGreyCard({
-    Key key,
-    @required this.size,
-    @required this.isMobileView,
-    @required this.child,
+    Key? key,
+    required this.size,
+    required this.isMobileView,
+    required this.child,
   }) : super(key: key);
   final Widget child;
   final Size size;
@@ -33,9 +33,9 @@ class AboutGreyCard extends StatelessWidget {
 
 class SkillsLabelCard extends StatelessWidget {
   const SkillsLabelCard({
-    Key key,
-    @required this.label,
-    @required this.child,
+    Key? key,
+    required this.label,
+    required this.child,
   }) : super(key: key);
 
   final String label;
@@ -66,19 +66,19 @@ class SkillsLabelCard extends StatelessWidget {
 
 class ProjectsCard extends StatelessWidget {
   const ProjectsCard({
-    Key key,
-    @required this.title,
-    @required this.date,
-    @required this.description,
-    this.itemList,
-    this.iconList,
-    this.iconColorList,
+    Key? key,
+    required this.title,
+    required this.date,
+    required this.description,
+    required this.itemList,
+    required this.iconList,
+    required this.iconColorList,
   }) : super(key: key);
 
   final title, date, description;
-  final List itemList;
-  final List iconList;
-  final List iconColorList;
+  final List<String> itemList;
+  final List<String> iconList;
+  final List<Color> iconColorList;
   @override
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;

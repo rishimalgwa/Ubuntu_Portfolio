@@ -5,9 +5,9 @@ import 'package:ubuntu_portfolio/constants/global.dart';
 import 'package:ubuntu_portfolio/constants/mycolors.dart';
 
 class OnScreenIcons extends StatefulWidget {
-  final String path, label;
+  final String? path, label;
   final bool isSvg;
-  const OnScreenIcons({Key key, this.path, this.label, this.isSvg = false})
+  const OnScreenIcons({Key? key, this.path, this.label, this.isSvg = false})
       : super(key: key);
 
   @override
@@ -53,9 +53,9 @@ class _OnScreenIconsState extends State<OnScreenIcons> {
         child: Column(
           children: [
             widget.isSvg
-                ? SvgPicture.asset(widget.path)
+                ? SvgPicture.asset(widget.path!)
                 : Image(
-                    image: AssetImage(widget.path),
+                    image: AssetImage(widget.path!),
                     fit: BoxFit.fill,
                     height: 40,
                   ),
@@ -63,7 +63,7 @@ class _OnScreenIconsState extends State<OnScreenIcons> {
               height: 8,
             ),
             Text(
-              widget.label,
+              widget.label!,
               style: TextStyle(fontSize: 10, color: Colors.white),
             )
           ],

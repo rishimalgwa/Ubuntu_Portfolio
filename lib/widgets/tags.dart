@@ -4,17 +4,17 @@ import 'package:flutter_tags/flutter_tags.dart';
 
 class SkillTags extends StatelessWidget {
   const SkillTags({
-    Key key,
-    @required this.itemList,
-    @required this.iconList,
-    @required this.iconColorList,
+    Key? key,
+    required this.itemList,
+    required this.iconList,
+    required this.iconColorList,
     this.height = 23,
     this.fontsize = 15,
   }) : super(key: key);
 
-  final List itemList;
-  final List iconList;
-  final List iconColorList;
+  final List<String?> itemList;
+  final List<String?> iconList;
+  final List<Color> iconColorList;
   final double height, fontsize;
   @override
   Widget build(BuildContext context) {
@@ -31,13 +31,13 @@ class SkillTags extends StatelessWidget {
             textActiveColor: Colors.black,
             image: ItemTagsImage(
                 child: SvgPicture.string(
-              iconList[index],
+              iconList[index] ?? "",
               color: iconColorList[index],
               height: isMobileView ? height - 5 : height,
             )),
             activeColor: Colors.white,
             index: index,
-            title: itemList[index],
+            title: itemList[index] ?? "",
             textStyle: TextStyle(
                 fontSize: isMobileView ? fontsize - 5 : fontsize,
                 color: Colors.black),

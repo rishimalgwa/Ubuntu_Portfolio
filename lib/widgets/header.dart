@@ -3,9 +3,9 @@ import 'package:ubuntu_portfolio/constants/mycolors.dart';
 
 class Header extends StatefulWidget {
   const Header({
-    Key key,
-    @required this.size,
-    @required String timeString,
+    Key? key,
+    required this.size,
+    required String timeString,
   })  : _timeString = timeString,
         super(key: key);
 
@@ -71,7 +71,7 @@ class _HeaderState extends State<Header> {
 
 class HeaderIcons extends StatelessWidget {
   const HeaderIcons({
-    Key key,
+    Key? key,
   }) : super(key: key);
 
   @override

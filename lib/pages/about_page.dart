@@ -4,18 +4,17 @@ import 'package:ubuntu_portfolio/constants/constants.dart';
 import 'package:ubuntu_portfolio/constants/global.dart';
 import 'package:ubuntu_portfolio/constants/mycolors.dart';
 import 'package:ubuntu_portfolio/utils/utils.dart';
-import 'package:ubuntu_portfolio/windows/about_me.dart';
 import 'package:ubuntu_portfolio/windows/projects.dart';
 import 'package:ubuntu_portfolio/windows/skills.dart';
 
 class AboutPage extends StatefulWidget {
-  const AboutPage({Key key}) : super(key: key);
+  const AboutPage({Key? key}) : super(key: key);
 
   @override
   _AboutPageState createState() => _AboutPageState();
 }
 
-ScrollController scrollController;
+ScrollController? scrollController;
 
 class _AboutPageState extends State<AboutPage> {
   @override
@@ -41,7 +40,7 @@ class _AboutPageState extends State<AboutPage> {
                   label: Constants.aboutMe,
                 ),
                 SideTabSelector(
-                  icon: FontAwesomeIcons.pencilRuler,
+                  icon: FontAwesomeIcons.penRuler,
                   label: Constants.skills,
                 ),
                 SideTabSelector(
@@ -94,9 +93,9 @@ class _AboutPageState extends State<AboutPage> {
 
 class SideTabSelector extends StatefulWidget {
   const SideTabSelector({
-    Key key,
-    @required this.label,
-    @required this.icon,
+    Key? key,
+    required this.label,
+    required this.icon,
   }) : super(key: key);
   final String label;
   final icon;
